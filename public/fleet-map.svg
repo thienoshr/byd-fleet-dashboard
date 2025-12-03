@@ -1,0 +1,42 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#f3f4f6"/>
+  
+  <!-- Thames River -->
+  <path d="M 50 300 Q 150 280, 250 290 T 450 295 T 650 300 T 750 310" 
+        fill="#93c5fd" 
+        stroke="#3b82f6" 
+        stroke-width="8" 
+        opacity="0.6"/>
+  
+  <!-- London outline/areas -->
+  <!-- Central London -->
+  <ellipse cx="400" cy="280" rx="120" ry="80" fill="#e5e7eb" stroke="#9ca3af" stroke-width="2" opacity="0.7"/>
+  
+  <!-- North London -->
+  <ellipse cx="380" cy="180" rx="100" ry="60" fill="#e5e7eb" stroke="#9ca3af" stroke-width="2" opacity="0.7"/>
+  
+  <!-- South London -->
+  <ellipse cx="420" cy="380" rx="110" ry="70" fill="#e5e7eb" stroke="#9ca3af" stroke-width="2" opacity="0.7"/>
+  
+  <!-- East London -->
+  <ellipse cx="500" cy="300" rx="90" ry="65" fill="#e5e7eb" stroke="#9ca3af" stroke-width="2" opacity="0.7"/>
+  
+  <!-- West London -->
+  <ellipse cx="300" cy="290" rx="85" ry="60" fill="#e5e7eb" stroke="#9ca3af" stroke-width="2" opacity="0.7"/>
+  
+  <!-- Major roads/grid -->
+  <line x1="200" y1="0" x2="200" y2="600" stroke="#d1d5db" stroke-width="2" opacity="0.4"/>
+  <line x1="400" y1="0" x2="400" y2="600" stroke="#d1d5db" stroke-width="2" opacity="0.4"/>
+  <line x1="600" y1="0" x2="600" y2="600" stroke="#d1d5db" stroke-width="2" opacity="0.4"/>
+  <line x1="0" y1="200" x2="800" y2="200" stroke="#d1d5db" stroke-width="2" opacity="0.4"/>
+  <line x1="0" y1="400" x2="800" y2="400" stroke="#d1d5db" stroke-width="2" opacity="0.4"/>
+  
+  <!-- Key landmarks (simplified) -->
+  <!-- Central London marker -->
+  <circle cx="400" cy="280" r="3" fill="#6b7280"/>
+  <text x="400" y="270" font-family="Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">Central</text>
+  
+  <!-- Title -->
+  <text x="400" y="30" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#374151" text-anchor="middle">London Map</text>
+</svg>
