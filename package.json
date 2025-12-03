@@ -8,8 +8,10 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "optionalDependencies": {
+    "better-sqlite3": "^9.2.2"
+  },
   "dependencies": {
-    "better-sqlite3": "^9.2.2",
     "jspdf": "^3.0.3",
     "jspdf-autotable": "^5.0.2",
     "leaflet": "^1.9.4",
