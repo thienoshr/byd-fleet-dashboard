@@ -428,7 +428,7 @@ export default function QuickSearch({ onStateChange }: QuickSearchProps) {
               </div>
             ) : query ? (
               <div className="px-4 py-8 text-center text-white/70">
-                <p>No results found for "{query}"</p>
+                <p>No results found for &quot;{query}&quot;</p>
               </div>
             ) : null}
           </div>

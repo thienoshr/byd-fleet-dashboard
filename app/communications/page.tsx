@@ -744,7 +744,7 @@ BYD Fleet Management`
       } else if (emailFilter === 'starred') {
         matchesFilter = email.isStarred === true && !email.isDeleted
       } else if (emailFilter === 'history') {
-        matchesFilter = email.folder === 'history' || (email.timestamp && new Date(email.timestamp).getTime() < Date.now() - 7 * 86400000)
+        matchesFilter = email.folder === 'history' || !!(email.timestamp && new Date(email.timestamp).getTime() < Date.now() - 7 * 86400000)
       }
       
       // Default folder assignment for emails without folder
@@ -837,9 +837,9 @@ BYD Fleet Management`
     const contractPattern = /\bC-\d{3}\b/g
     const casePattern = /\bCASE-\d{3}\b/g
 
-    const vehicleRegs = [...transcript.fullText.matchAll(vehicleRegPattern)].map(m => m[0].replace(/\s/g, ' '))
-    const contracts = [...transcript.fullText.matchAll(contractPattern)].map(m => m[0])
-    const cases = [...transcript.fullText.matchAll(casePattern)].map(m => m[0])
+    const vehicleRegs = Array.from(transcript.fullText.matchAll(vehicleRegPattern)).map(m => m[0].replace(/\s/g, ' '))
+    const contracts = Array.from(transcript.fullText.matchAll(contractPattern)).map(m => m[0])
+    const cases = Array.from(transcript.fullText.matchAll(casePattern)).map(m => m[0])
 
     return {
       ...transcript,
