@@ -12,6 +12,14 @@ export async function GET(request: NextRequest) {
 
   const db = getDb()
 
+  // If database is not available (e.g., on Vercel), return error
+  if (!db) {
+    return NextResponse.json(
+      { error: 'Database not available. This feature requires a local database.' },
+      { status: 503 }
+    )
+  }
+
   try {
     if (format === 'csv') {
       // Return CSV data

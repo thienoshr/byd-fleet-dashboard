@@ -1,4 +1,14 @@
-import Database from 'better-sqlite3'
+// Make database optional for Vercel deployment (better-sqlite3 doesn't work on serverless)
+let Database: any = null
+let db: any = null
+
+try {
+  Database = require('better-sqlite3')
+} catch (e) {
+  // Database not available (e.g., on Vercel)
+  console.warn('better-sqlite3 not available, database features disabled')
+}
+
 import path from 'path'
 import fs from 'fs'
 
@@ -8,19 +18,29 @@ const dbPath = path.join(process.cwd(), 'data', 'fleet.db')
 // Ensure data directory exists
 const dataDir = path.join(process.cwd(), 'data')
 if (!fs.existsSync(dataDir)) {
-  fs.mkdirSync(dataDir, { recursive: true })
+  try {
+    fs.mkdirSync(dataDir, { recursive: true })
+  } catch (e) {
+    // Directory creation may fail on serverless
+  }
 }
-
-// Initialize database connection
-let db: Database.Database | null = null
 
 /**
  * Get database instance (singleton pattern)
+ * Returns null if database is not available (e.g., on Vercel)
  */
-export function getDb(): Database.Database {
+export function getDb(): any {
+  if (!Database) {
+    return null
+  }
   if (!db) {
-    db = new Database(dbPath)
-    initializeDatabase(db)
+    try {
+      db = new Database(dbPath)
+      initializeDatabase(db)
+    } catch (e) {
+      console.warn('Failed to initialize database:', e)
+      return null
+    }
   }
   return db
 }
@@ -28,7 +48,7 @@ export function getDb(): Database.Database {
 /**
  * Initialize database schema
  */
-function initializeDatabase(db: Database.Database) {
+function initializeDatabase(db: any) {
   // Enable foreign keys
   db.pragma('foreign_keys = ON')
 
@@ -89,7 +109,7 @@ function initializeDatabase(db: Database.Database) {
 /**
  * Insert sample data for development
  */
-function insertSampleData(db: Database.Database) {
+function insertSampleData(db: any) {
   const insertVehicle = db.prepare(`
     INSERT INTO vehicles (vehicle_id, registration, rental_partner, part_status, days_overdue, contract_expiry, risk_flag)
     VALUES (?, ?, ?, ?, ?, ?, ?)
